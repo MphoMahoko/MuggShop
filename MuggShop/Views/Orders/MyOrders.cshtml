@@ -1,0 +1,152 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout - minimal.cshtml";
+    ViewData["Title"] = "My Orders";
+    ViewData["Description"] = "A list of previously placed orders";
+}
+
+@model IEnumerable<MuggShop.Models.Order>
+
+
+
+<div class="container">
+
+
+    <!-- orders -->
+
+    @if (User.IsInRole("Admin"))
+    {
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#all">All</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#pending">Pending</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#processing">Processing</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#cancelled">Cancelled</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#complete">Complete</a>
+        </li>
+    </ul>
+    }
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane container active" id="all">
+
+        </div>
+        
+
+
+
+
+
+
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td scope="row">@item.Date.ToLongDateString()</td>
+                        <td>
+                            <div class="alert alert-primary" role="alert">
+                                @item.status
+                            </div>
+                        </td>
+                        <td>
+                            @item.Address1
+                        </td>
+                        <td>@item.OrderDetails.Count</td>
+                        <td>@item.Phone</td>
+                        <td>
+                            <div class="">
+
+                                @Html.ActionLink("View", "Details", "Orders", new { id = item.Id }, new { @class = "btn btn-primary fa fa-check " })
+                                @if (User.IsInRole("Admin"))
+                                {
+
+                                    @Html.ActionLink("complete", "Process", "Orders", new { status = "complete", id = item.Id }, new { @class = "btn btn-success fa fa-check " })
+                                    @Html.ActionLink("process", "Process", "Orders", new { status = "processing", id = item.Id }, new { @class = "btn btn-warning fa fa-cogs" })
+                                    @Html.ActionLink("cancel", "Process", "Orders", new { status = "cancel", id = item.Id }, new { @class = "btn btn-danger fa fa-minus-circle" })
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+
+               
+                </tbody>
+        </table>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- end of orders -->
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="social-icons">
+                        <a href="#"><span class="icon-facebook"></span></a>
+                        <a href="#"><span class="icon-twitter"></span></a>
+                        <a href="#"><span class="icon-youtube"></span></a>
+                        <a href="#"><span class="icon-instagram"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

@@ -1,0 +1,159 @@
+﻿
+@model MuggShop.ViewModels.ShoppingCartOrder
+<!--
+model MuggShop.Models.Order
+    -->
+
+@{
+    Layout = "~/Views/Shared/_Layout - minimal.cshtml";
+}
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="site-section">
+    <div class="container">
+       
+        <div class="row">
+            <div class="col-md-6 mb-5 mb-md-0">
+                <h2 class="h3 mb-3 text-black font-heading-serif">Billing Details</h2>
+                <div class="p-3 p-lg-5 border">
+
+                    @using (Html.BeginForm("Add", "Orders", FormMethod.Post, null))
+                    {
+
+
+                        <!-- Html.HiddenFor(m => m.Id)-->
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Order.FirstName)
+                                @Html.TextBoxFor(m => m.Order.FirstName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Order.FirstName, "", new { style = "color: red" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Order.LastName)
+                                @Html.TextBoxFor(m => m.Order.LastName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Order.LastName, "", new { style = "color: red" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                @Html.LabelFor(m => m.Order.Address1)
+                                @Html.TextBoxFor(m => m.Order.Address1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Order.Address1, "", new { style = "color: red" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Order.Address2, new { @class = "form-control", placeholder = "Apartment, suite, unit etc. (optional)" })
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Order.Province, new { @class = "text-black text-danger" })
+                                @Html.TextBoxFor(m => m.Order.Province, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Order.Province, "", new { style = "color: red" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Order.PostCode, new { @class = "text-black text-danger" })
+                                @Html.TextBoxFor(m => m.Order.PostCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Order.PostCode, "", new { style = "color: red" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-5">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Order.Email, new { @class = "text-black text-danger" })
+                                @Html.TextBoxFor(m => m.Order.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Order.Email, "", new { style = "color: red" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Order.Phone, new { @class = "text-black text-danger" })
+                                @Html.TextBoxFor(m => m.Order.Phone, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Order.Phone, "", new { style = "color: red" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Order.Notes, new { @class = "text-black text-danger" })
+                            @Html.TextAreaFor(m => m.Order.Notes, new { @class = "form-control", cols = "30", rows = "5", placeholder = "Write your notes here..." })
+
+
+                        </div>
+                        <button type="submit" value="false" class="btn btn-primary btn-lg btn-block">Place Order</button>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <h2 class="h3 mb-3 text-black font-heading-serif">Your Order</h2>
+                        <div class="p-3 p-lg-5 border">
+                            <table class="table site-block-order-table mb-5">
+                                <thead>
+                                <th>Product</th>
+                                <th>Total</th>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <tr>
+                                            <td>@item.Product.Name <strong class="mx-2">x</strong> @item.Count</td>
+                                            <td>R @item.Product.Price</td>
+                                        </tr>
+                                    }
+
+                                        <tr>
+                                            <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+
+                                            
+
+                                            @{
+
+                                                decimal totalitems = 0;
+
+                                                foreach (var item in Model.CartItems)
+                                                {
+                                                    totalitems += (item.Count * item.Product.Price);
+                                                }
+
+
+                                            }
+                                            <td class="text-black">R @totalitems </td>
+
+                                        </tr>
+
+                                </tbody>
+                            </table>
+
+                 
+                            <!--
+                            <div class="form-group">
+
+                              Html.ActionLink("Original Place Order Button", "Add", "Orders", null, new { class = "btn btn-primary btn-lg btn-block" })
+
+                            </div>
+                                -->
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- </form> -->
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout - minimal.cshtml";
+}
+
+
+
+
+@model IEnumerable<MuggShop.Models.CartItem>
+
+
+@if (Model.Count() == 0)
+{
+
+    ViewData["Title"] = "Your cart is empty";
+
+
+
+}
+else
+{
+    ViewData["Title"] = "Shopping Cart";
+
+    ViewData["Description"] = "You can place and order or continue buying more muggs";
+
+    <div class="site-section  pb-0">
+        <div class="container">
+         
+            <div class="row mb-5">
+                <form class="col-md-12" method="post">
+                    <div class="site-blocks-table">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Image</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-total">Total</th>
+                                    <th class="product-remove">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <img src="~/uploadImages/@item.Product.PictureURL" alt="Image" class="img-fluid">
+                                        </td>
+                                        <td class="product-name">
+                                            <h2 class="h5 cart-product-title text-black">@item.Product.Name</h2>
+                                        </td>
+                                        <td>R @item.Product.Price </td>
+                                        <td>
+                                            <div class="input-group mb-3" style="max-width: 120px;">
+                                                <div class="input-group-prepend">
+                                                    @Html.ActionLink("-", "MinusCount", new { id = item.Id }, new { @class = "btn btn-outline-primary " })
+
+                                                </div>
+                                                <input type="text" disabled="disabled" class="form-control text-center border mr-0" value="@item.Count" placeholder=""
+                                                       aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                <div class="input-group-append">
+                                                    @Html.ActionLink("+", "AddCount", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td>R @(item.Count * item.Product.Price)</td>
+                                        <td>
+                                            @Html.ActionLink("X", "DeleteItem", new { id = item.Id }, new { @class = "btn btn-primary height-auto btn-sm" })
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="site-section pt-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row mb-5">
+
+                        <div class="col-md-6">
+                            @Html.ActionLink("Continue Shopping", "Index", "Products", null, new { @class = "btn btn-outline-primary btn-md btn-block" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 pl-5">
+                    <div class="row justify-content-end">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-12 text-right border-bottom mb-5">
+                                    <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <span class="text-black">Total</span>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    @{
+
+                                        decimal totalitems = 0;
+
+                                        foreach (var item in Model)
+                                        {
+                                            totalitems += (item.Count * item.Product.Price);
+                                        }
+
+
+                                    }
+
+
+
+                                    <strong class="text-black">R @totalitems</strong>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.ActionLink("Proceed to Checkout", "Add", "Orders", null, new { @class = "btn btn-primary btn-lg btn-block" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

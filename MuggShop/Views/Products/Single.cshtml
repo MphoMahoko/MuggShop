@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout - minimal.cshtml";
+}
+
+@model MuggShop.Models.Product
+
+@{
+    ViewData["Title"] =Model.Name;
+}
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    @if (@ViewBag.name != null)
+    {
+        <div class="alert alert-success" id="divInfo">
+            <strong>Added to cart</strong>
+        </div>
+    }
+</div>
+
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="owl-carousel hero-slide owl-style">
+                    <img src="~/uploadImages/@Model.PictureURL" alt="Image" class="img-fluid">
+                    <img src="~/uploadImages/@Model.PictureURL" alt="Image" class="img-fluid">
+                    <img src="~/uploadImages/@Model.PictureURL" alt="Image" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-5 ml-auto">
+                <h2 class="text-primary">Mugg Details</h2>
+                <p>@Model.Description</p>
+                <p>R @Model.Price</p>
+                <div class="mb-5">
+                    <div class="input-group mb-3" style="max-width: 200px;">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                        </div>
+                        <input type="text" class="form-control text-center border mr-0" value="1" placeholder=""
+                               aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                @Html.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { id = Model.Id }, new { @class = "buy-now btn btn-sm height-auto px-4 py-3 btn-primary", Id = "addbtn", onclick = "myFunction()" })
+
+                <div>
+                    @if (User.IsInRole("Admin"))
+                    { 
+                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+                    
+                    }
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+
+
+            setTimeout(function () {
+                $(".alert").fadeOut("slow");
+            }, 1500);
+        });
+    </script>
+}
+

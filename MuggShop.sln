@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuggShop", "MuggShop\MuggShop.csproj", "{6A627C6E-1B9C-4B37-A233-537B16C6DFA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A627C6E-1B9C-4B37-A233-537B16C6DFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A627C6E-1B9C-4B37-A233-537B16C6DFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A627C6E-1B9C-4B37-A233-537B16C6DFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A627C6E-1B9C-4B37-A233-537B16C6DFA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97D3EF26-FE0B-488A-AF9F-9FBDC8076D93}
+	EndGlobalSection
+EndGlobal

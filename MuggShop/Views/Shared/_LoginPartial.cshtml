@@ -1,0 +1,59 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+
+        <ul class="site-menu main-menu js-clone-nav mx-auto border-none">
+           
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown"  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)!</a>
+
+
+              
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        @Html.ActionLink("Orders", "Index", "Orders", "", new { @class = "dropdown-item" })
+                        @Html.ActionLink("Inbox", "Index", "Messages", "", new { @class = "dropdown-item" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("My orders", "MyOrders", "Orders", "", new { @class = "dropdown-item" })
+                    }
+
+
+                </div>
+            </li>
+
+            <li>
+
+                <a href="javascript:{}" onclick="document.getElementById('logoutForm').submit(); return false;">Logout</a>
+                <!-- <button class=" text-left btn-link" type="submit">Logout</button> -->
+            </li>
+
+
+        </ul>
+
+
+
+
+    </form>
+}
+else
+{
+    <ul class="site-menu main-menu js-clone-nav mx-auto border-none">
+
+        <li><a class="nav-link text-left" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+        <li><a class="nav-link text-left" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+
+
+
+    }

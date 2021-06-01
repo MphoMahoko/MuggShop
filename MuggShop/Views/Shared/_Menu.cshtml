@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<li>@Html.ActionLink("home", "index", "Home", null, new { @class = "nav-link text-left" }) </li>
+
+<li>@Html.ActionLink("Muggs", "Index", "Products", null, new { @class = "nav-link text-left" })</li>
+
+<li>@Html.ActionLink("Contact", "Add", "Messages", null, new { @class = "nav-link text-left" })</li>
+
+
+
+<li>@Html.ActionLink("Cart", "Index", "ShoppingCart", null, new { @class = "nav-link text-left" })</li>
+
+<li>@Html.Partial("_LoginPartial")</li>
+

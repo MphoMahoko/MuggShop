@@ -1,0 +1,44 @@
+
+
+body {
+
+   
+    color: 
+
+    black;
+  
+
+}
+
+.table-sm td, .table-sm th {
+
+    padding: 0px;
+
+}
+
+#single-order
+{
+    background-color: #f8ebe8;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+    width: 360px;
+    height: 343px;
+}
+
+hero-2 {
+    background-image: url('images/hero_2.jpg');
+}
+
+form {
+  
+    margin-top: 0em;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: 250px;
+}
+
